@@ -30,7 +30,9 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# APP을 사용하겠음
 INSTALLED_APPS = [
+    'polls.apps.PollsConfig', # 설문조사 APP등록
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
