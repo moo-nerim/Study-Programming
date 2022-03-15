@@ -24,7 +24,19 @@ class MainActivity : AppCompatActivity() {
         addButton2.setOnClickListener {
             val result = add(getFirst(), getSecond())
             output.text = "Add result : $result"
+
+            val result2 = add(a=10, b=10)
+
+            val result3 = sum(10, 20, 30)
         }
+    }
+
+    fun sum(vararg inputs:Int): Int{ // vararg -> 들어오는게 여러개
+        var output = 0
+        for (num in inputs) {
+            output += num
+        }
+        return output
     }
 
     fun getFirst():Int {
