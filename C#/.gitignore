@@ -1,8 +1,10 @@
 *.sln
 *.config
 *.csproj
-
-HelloCSharp/bin/Debug
-HelloCSharp/obj/Debug
-HelloCSharp/.vs
+*.resx
+*.settings
 AssemblyInfo.cs
+
+*/bin/Debug
+*/obj/Debug
+*/.vs
