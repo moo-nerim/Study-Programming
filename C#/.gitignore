@@ -1,0 +1,8 @@
+*.sln
+*.config
+*.csproj
+
+HelloCSharp/bin/Debug
+HelloCSharp/obj/Debug
+HelloCSharp/.vs
+AssemblyInfo.cs
