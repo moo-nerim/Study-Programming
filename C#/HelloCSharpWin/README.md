@@ -25,3 +25,16 @@ sum1.Focus();
 ### 문자열을 int로 바꿀 수 있는지 확인
 * if (int.TryParse(sum1.Text, out num1) == false )
 * sum1.Text를 int형으로 바꿔서 out 타입의 num1에 저장
+
+# 06.27 📝
+### enum class (열거형 클래스)
+* 형태 -> public enum Operators { Add, Sub, Multi, Div }
+* 정수형 상수에 이름을 붙여서 코드를 이해하기 쉽게 해줌
+### object sender
+* 이벤트 발생 객체
+↳ 사용법 : 
+Button numButton = (Button)sender;
+SetNum(numButton.Text);
+### string -> int 형변환
+* int num = int.Parse(NumScreen.Text);
+* int num = Convert.ToInt32(NumScreen.Text);
