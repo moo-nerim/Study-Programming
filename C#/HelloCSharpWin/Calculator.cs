@@ -10,63 +10,17 @@ using System.Windows.Forms;
 
 namespace HelloCSharpWin
 {
+    public enum Operators { Add, Sub, Multi, Div } // 열거형 데이터 타입
+
     public partial class Calculator : Form
     {
+        public int Result = 0;
+        public bool isNewNum = true;
+        public Operators op = Operators.Add;
+
         public Calculator()
         {
             InitializeComponent();
-        }
-
-        private void Calculator_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void HelloLabel_Click(object sender, EventArgs e)
-        {
-            // HelloLabel.Text = "Hello C#";
-
-            int num1 = 1;
-            int num2 = 2;
-
-            int sum = num1 + num2;
-
-            // ToString() : int -> string
-            HelloLabel.Text = sum.ToString();
-        }
-
-        private void sumNumbers_Click(object sender, EventArgs e)
-        {
-            int num1 = 0, num2 = 0;
-
-            // 문자열에 null 또는 공백 있는지 확인 -> string.IsNullOrWhiteSpace()
-            if (string.IsNullOrWhiteSpace(sum1.Text))
-            {
-                // 알림창
-                MessageBox.Show("입력칸에 숫자를 입력해주세요.");
-                return;
-            }
-
-            // int.TryParse(string str, out num) -> str을 숫자로 바꿔서 num1에 저장
-            if (int.TryParse(sum1.Text, out num1) == false )
-            {
-                // 알림창
-                MessageBox.Show("입력칸에 문자가 들어왔습니다. 숫자를 입력해주세요.");
-
-                // 사용자 배려 -> sum1 입력칸에 포커스
-                sum1.SelectAll();
-                sum1.Focus();
-
-                return;
-            }
-
-            // Convert.ToInt32() : String -> Int
-            num1 = Convert.ToInt32(sum1.Text);
-            num2 = Convert.ToInt32(sum2.Text);
-
-            int sum = Add(num1,  num2);
-
-            sumResult.Text = sum.ToString();
         }
 
         public int Add(int num1, int num2)
@@ -83,6 +37,67 @@ namespace HelloCSharpWin
         public int Sub(int num1, int num2)
         {
             return num1 - num2;
+        }
+
+        private void NumButton1_Click(object sender, EventArgs e) // sender -> 이벤트 발생 객체
+        {
+            Button numButton = (Button)sender;
+            SetNum(numButton.Text);
+        }
+
+        public void SetNum(String num)
+        {
+            if (isNewNum) // 새로운 숫자 입력 시작
+            {
+                NumScreen.Text = num;
+                isNewNum = false;
+            }
+            else if (NumScreen.Text == "0")
+            {
+                NumScreen.Text = num;
+            }
+            else
+            {
+                NumScreen.Text += num;
+            }
+        }
+
+        private void NumPlus_Click(object sender, EventArgs e)
+        {
+            if (isNewNum == false) // 연산자가 여러번 동시에 눌러지는 경우 예외처리
+            {
+                int num = int.Parse(NumScreen.Text); // string -> int
+                if (op == Operators.Add)
+                {
+                    Result = Add(Result, num);
+                }
+                else if (op == Operators.Sub)
+                {
+                    Result = Sub(Result, num);
+                }
+
+                NumScreen.Text = Result.ToString();
+                isNewNum = true;
+
+                Button opButton = (Button)sender;
+                if (opButton.Text == "+")
+                {
+                    op = Operators.Add;
+                }
+                else if (opButton.Text == "-")
+                {
+                    op = Operators.Sub;
+                }
+            }
+        }
+
+        private void NumClear_Click(object sender, EventArgs e)
+        {
+            Result = 0;
+            isNewNum = true;
+            op = Operators.Add;
+
+            NumScreen.Text = "0";
         }
     }
 }
