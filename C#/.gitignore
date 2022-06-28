@@ -3,6 +3,10 @@
 *.csproj
 *.resx
 *.settings
+*.user
+*.csproj.nuget.*
+*.assets.json
+*.nuget.cache
 AssemblyInfo.cs
 
 */bin/Debug
